@@ -1,20 +1,32 @@
 package com.driver.model;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "parkinglot")
+@Table(name = "parking_lots")
+
 public class ParkingLot {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String address;
     private String name;
 
-    @OneToMany(mappedBy = "parkinglot",cascade = CascadeType.ALL)
-    private List<Spot>spotList=new ArrayList<>();
+    private String address;
+
+    @OneToMany(mappedBy = "parkingLot", cascade = CascadeType.ALL)
+    private List<Spot> spotList = new ArrayList<>();
+
+    public ParkingLot() {
+    }
+
+    public ParkingLot(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
 
     public int getId() {
         return id;
@@ -22,14 +34,6 @@ public class ParkingLot {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getName() {
@@ -40,6 +44,14 @@ public class ParkingLot {
         this.name = name;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public List<Spot> getSpotList() {
         return spotList;
     }
@@ -47,14 +59,4 @@ public class ParkingLot {
     public void setSpotList(List<Spot> spotList) {
         this.spotList = spotList;
     }
-
-    public ParkingLot() {
-    }
-
-    public ParkingLot(String address, String name) {
-        this.address = address;
-        this.name = name;
-    }
-
-
 }
